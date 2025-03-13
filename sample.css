@@ -1,0 +1,88 @@
+const tasks = {
+    task1: { title: "Project 1", path: "file:///D:/front-end-new/task_json_iframe/works/task1/index.html" },
+    task2: { title: "Project 2", path: "file:///D:/front-end-new/task_json_iframe/works/task2/index.html" },
+    task3: { title: "Project 3", path: "file:///D:/front-end-new/task_json_iframe/works/task3/index.html" },
+  };
+  
+  function createMenu() {
+    const menu = document.createElement("nav");
+    const menuList = document.createElement("ul");
+  
+    Object.entries(tasks).forEach(([key, task]) => {
+        const menuItem = document.createElement("li");
+        const link = document.createElement("a");
+  
+        link.textContent = task.title;
+        link.href = "#";
+        link.addEventListener("click", (e) => {
+            e.preventDefault();
+            showTask(task.path);
+        });
+  
+        menuItem.appendChild(link);
+        menuList.appendChild(menuItem);
+    });
+  
+    menu.appendChild(menuList);
+    document.body.prepend(menu);
+  }
+  
+  function showTask(path) {
+    let frame = document.querySelector("iframe");
+  
+    if (!frame) {
+        frame = document.createElement("iframe");
+        document.body.appendChild(frame);
+    }
+  
+    frame.src = path;
+  }
+  
+  window.addEventListener("DOMContentLoaded", createMenu);
+  
+  ---------------------------------------------------------------------------------
+  #css
+  
+  body {
+      margin: 0;
+      padding: 0;
+      font-family: Arial, sans-serif;
+      border-top: 1px solid black;
+    }
+   
+    nav {
+      background-color: #f0f0f0;
+      padding: 10px;
+    }
+   
+    nav ul {
+      list-style-type: none;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      gap: 20px;
+    }
+   
+    nav ul li a {
+      text-decoration: none;
+      color: #333;
+      font-weight: bold;
+    }
+   
+    nav ul li a:hover {
+      color: #007bff;
+    }
+   
+    iframe {
+      margin-top: 10px;
+      width: 100%;
+      height: calc(100vh - 60px);
+      border: none;
+    }
+   
+    h2 {
+      margin: 20px;
+      text-align: center;
+    }
+  
+  
